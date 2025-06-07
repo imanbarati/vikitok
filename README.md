@@ -1,59 +1,50 @@
-# WikiTok
+# React + TypeScript + Vite
 
-A TikTok-style interface for exploring random Wikipedia articles in multiple languages.
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-## Features
+Currently, two official plugins are available:
 
-- Vertical scrolling feed of random Wikipedia articles
-- Support for 14 languages including English, Spanish, French, German, Chinese, Japanese and more
-- Article previews with images, titles and excerpts
-- Share articles directly or copy links
-- Language selector with country flags
-- Preloading of images and content for smooth scrolling
-- Responsive design that works on mobile and desktop
-- Progressive Web App (PWA) support for installing as a standalone app
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-## Tech Stack
+## Expanding the ESLint configuration
 
-- React 18
-- TypeScript
-- Tailwind CSS
-- Vite
+If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
 
-## Development
+- Configure the top-level `parserOptions` property like this:
 
-Run the commands below in the `/frontend` folder.
-
-1. Install dependencies:
-
-```bash
-bun install
+```js
+export default tseslint.config({
+  languageOptions: {
+    // other options...
+    parserOptions: {
+      project: ['./tsconfig.node.json', './tsconfig.app.json'],
+      tsconfigRootDir: import.meta.dirname,
+    },
+  },
+})
 ```
 
-2. Run development server:
+- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
+- Optionally add `...tseslint.configs.stylisticTypeChecked`
+- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
 
-```bash
-bun run dev
+```js
+// eslint.config.js
+import react from 'eslint-plugin-react'
+
+export default tseslint.config({
+  // Set the react version
+  settings: { react: { version: '18.3' } },
+  plugins: {
+    // Add the react plugin
+    react,
+  },
+  rules: {
+    // other rules...
+    // Enable its recommended rules
+    ...react.configs.recommended.rules,
+    ...react.configs['jsx-runtime'].rules,
+  },
+})
 ```
-
-No backend required!
-
-## Demo
-
-Check it out here at [wikitok.vercel.app](https://wikitok.vercel.app) or [wikitok.io](https://www.wikitok.io)
-
-**Note:** This is the original WikiTok web project, not affiliated with wikitok.net or the independently developed WikiTok mobile apps for iPhone and Android.
-
-## Contributing
-
-1. Fork the repository
-2. Create a new branch
-3. Make your changes and commit them
-
-## License
-
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
-
-## Star History
-
-![Star History Chart](https://api.star-history.com/svg?repos=IsaacGemal/wikitok&type=Date)
